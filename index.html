@@ -7,190 +7,178 @@
     body {
       margin: 0;
       height: 100vh;
-      background: linear-gradient(to bottom right, #ffe0ec, #c6fff7);
+      background: linear-gradient(to bottom right, #ff9a9e, #fad0c4);
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      font-family: 'Comic Sans MS', cursive, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       overflow: hidden;
       position: relative;
     }
 
     h1 {
-      font-size: 3.5rem;
-      color: #ff4081;
-      margin-bottom: 40px;
-      text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+      font-size: 3rem;
+      color: #fff;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+      margin-bottom: 50px;
     }
 
     .buttons {
       display: flex;
       gap: 20px;
-      z-index: 3;
-      margin-bottom: 20px;
+      z-index: 2;
     }
 
     button {
-      padding: 15px 35px;
-      font-size: 1.4rem;
+      padding: 15px 30px;
+      font-size: 1.2rem;
       border: none;
-      border-radius: 40px;
+      border-radius: 30px;
       cursor: pointer;
-      transition: all 0.3s ease;
-      font-weight: bold;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease, background 0.3s ease;
     }
 
     #yes {
       background: #fff;
-      color: #e91e63;
+      color: #ff4081;
     }
 
     #yes:hover {
-      background: #e91e63;
+      background: #ff4081;
       color: #fff;
       transform: scale(1.1);
     }
 
     #no {
       background: #fff;
-      color: #333;
+      color: #555;
+      position: relative;
+    }
+
+    #no:hover {
+      transform: translate(
+        calc(100px - 200px * Math.random()),
+        calc(100px - 200px * Math.random())
+      );
+    }
+
+    .hearts {
       position: absolute;
-      top: 75%;
-      left: 55%;
-      transform: translate(-50%, -50%);
-      z-index: 3;
-    }
-
-    .characters {
-      position: absolute;
-      bottom: 180px;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    .character-img {
-      width: 200px;
-      height: auto;
-      transition: transform 1s ease;
-    }
-
-    .left {
-      transform: translateX(-140px);
-    }
-
-    .right {
-      transform: translateX(140px);
-    }
-
-    .hug-left {
-      animation: hug-left 1s forwards;
-    }
-
-    .hug-right {
-      animation: hug-right 1s forwards;
-    }
-
-    @keyframes hug-left {
-      to { transform: translateX(-30px); }
-    }
-
-    @keyframes hug-right {
-      to { transform: translateX(30px); }
-    }
-
-    .message {
-      margin-top: 30px;
-      font-size: 2rem;
-      color: #d81b60;
-      display: none;
-      text-align: center;
-      max-width: 80%;
-      z-index: 3;
-    }
-
-    .flowers {
-      position: absolute;
-      width: 100%;
-      height: 100%;
       top: 0;
       left: 0;
       pointer-events: none;
+      width: 100%;
+      height: 100%;
       overflow: hidden;
       z-index: 0;
     }
 
-    .flower {
+    .heart {
+      width: 20px;
+      height: 20px;
+      background: red;
       position: absolute;
-      font-size: 1.8rem;
-      animation: float 5s ease-in infinite;
+      animation: float 3s ease-in forwards;
+      transform: rotate(45deg);
+      clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 20% 100%, 0 35%);
     }
 
     @keyframes float {
-      0% {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-100vh) rotate(360deg) scale(1.5);
+      to {
+        transform: translateY(-100vh) rotate(720deg);
         opacity: 0;
       }
     }
+
+    .message {
+      margin-top: 40px;
+      font-size: 2rem;
+      color: #fff;
+      display: none;
+      z-index: 2;
+    }
+
+    .characters {
+      position: absolute;
+      bottom: 100px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 1;
+    }
+
+    .character {
+      font-size: 4rem;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .dancing {
+      animation: dance 0.6s infinite alternate;
+    }
+
+    @keyframes dance {
+      0% { transform: translateY(0px) rotate(-5deg); }
+      100% { transform: translateY(-10px) rotate(5deg); }
+    }
+
+    .hugging {
+      transform: translateX(-30px);
+    }
+
+    .hidden {
+      display: none;
+    }
+
   </style>
 </head>
 <body>
-
   <h1>Will You Be My Forever?</h1>
   <div class="buttons">
     <button id="yes">Yes 💖</button>
     <button id="no">No 😢</button>
   </div>
-
-  <div class="message" id="message">
-    <p>🌸 Take your flowers 🌸</p>
-    <p style="font-size: 1.4rem;">From the moment I met you, I knew… Forever wouldn’t be long enough 💗</p>
+  <div class="message" id="message">You just made me the happiest person ever! 💍✨</div>
+  <div class="characters" id="characters">
+    <div class="character dancing" id="char1">🕺</div>
+    <div class="character hidden" id="char2">💃</div>
   </div>
-
-  <div class="characters">
-    <img src="https://drive.google.com/file/d/1W5J9axdzAp3TsNvVDkciU1FnfFBw-Hk2/view?usp=share_link" class="character-img left" id="leftChar" alt="cartoon girl">
-    <img src="https://drive.google.com/file/d/1TF9BgrK0dq5F8sBFNfNXcRIHFKQPtR8u/view?usp=share_link" class="character-img right" id="rightChar" alt="cartoon boy">
-  </div>
-
-  <div class="flowers" id="flowers"></div>
+  <div class="hearts" id="hearts"></div>
 
   <script>
     const yesBtn = document.getElementById('yes');
     const noBtn = document.getElementById('no');
     const message = document.getElementById('message');
-    const leftChar = document.getElementById('leftChar');
-    const rightChar = document.getElementById('rightChar');
-    const flowers = document.getElementById('flowers');
+    const hearts = document.getElementById('hearts');
+    const char1 = document.getElementById('char1');
+    const char2 = document.getElementById('char2');
 
     yesBtn.addEventListener('click', () => {
       message.style.display = 'block';
-      leftChar.classList.add('hug-left');
-      rightChar.classList.add('hug-right');
 
-      for (let i = 0; i < 40; i++) {
-        const flower = document.createElement('div');
-        flower.classList.add('flower');
-        flower.style.left = Math.random() * window.innerWidth + 'px';
-        flower.style.top = Math.random() * window.innerHeight + 'px';
-        flower.innerText = ['🌸','🌼','🌷','💐','🌻'][Math.floor(Math.random() * 5)];
-        flower.style.animationDuration = (3 + Math.random() * 4) + 's';
-        flowers.appendChild(flower);
-        setTimeout(() => flower.remove(), 5000);
+      // Heart explosion
+      for (let i = 0; i < 100; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.style.left = Math.random() * window.innerWidth + 'px';
+        heart.style.top = Math.random() * window.innerHeight + 'px';
+        heart.style.background = `hsl(${Math.random() * 360}, 80%, 60%)`;
+        hearts.appendChild(heart);
+        setTimeout(() => heart.remove(), 3000);
       }
+
+      // Show hug character
+      char2.classList.remove('hidden');
+      setTimeout(() => {
+        char2.classList.add('hugging');
+        char1.classList.remove('dancing');
+      }, 300);
     });
 
     noBtn.addEventListener('mouseover', () => {
-      noBtn.style.top = Math.random() * (window.innerHeight - 80) + 'px';
-      noBtn.style.left = Math.random() * (window.innerWidth - 120) + 'px';
+      noBtn.style.position = 'absolute';
+      noBtn.style.top = Math.random() * (window.innerHeight - 50) + 'px';
+      noBtn.style.left = Math.random() * (window.innerWidth - 100) + 'px';
     });
   </script>
 </body>
