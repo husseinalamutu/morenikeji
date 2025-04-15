@@ -7,7 +7,7 @@
     body {
       margin: 0;
       height: 100vh;
-      background: linear-gradient(to bottom right, #ff9a9e, #fad0c4);
+      background: linear-gradient(to bottom right, #fbc2eb, #a6c1ee);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -18,10 +18,12 @@
     }
 
     h1 {
-      font-size: 3rem;
+      font-size: 2.8rem;
       color: #fff;
       text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
       margin-bottom: 50px;
+      text-align: center;
+      padding: 0 20px;
     }
 
     .buttons {
@@ -41,11 +43,11 @@
 
     #yes {
       background: #fff;
-      color: #ff4081;
+      color: #e91e63;
     }
 
     #yes:hover {
-      background: #ff4081;
+      background: #e91e63;
       color: #fff;
       transform: scale(1.1);
     }
@@ -63,7 +65,7 @@
       );
     }
 
-    .hearts {
+    .flowers {
       position: absolute;
       top: 0;
       left: 0;
@@ -74,37 +76,34 @@
       z-index: 0;
     }
 
-    .heart {
-      width: 20px;
-      height: 20px;
-      background: red;
+    .flower {
       position: absolute;
+      font-size: 24px;
       animation: float 3s ease-in forwards;
-      transform: rotate(45deg);
-      clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 20% 100%, 0 35%);
     }
 
     @keyframes float {
       to {
-        transform: translateY(-100vh) rotate(720deg);
+        transform: translateY(-100vh) rotate(360deg);
         opacity: 0;
       }
     }
 
     .message {
       margin-top: 40px;
-      font-size: 2rem;
+      font-size: 1.8rem;
       color: #fff;
       display: none;
       z-index: 2;
+      text-align: center;
     }
 
     .characters {
       position: absolute;
-      bottom: 100px;
+      bottom: 120px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 50px;
       z-index: 1;
     }
 
@@ -130,41 +129,48 @@
       display: none;
     }
 
+    .flip {
+      transform: scaleX(-1);
+    }
+
   </style>
 </head>
 <body>
-  <h1>Will You Be My Forever?</h1>
+  <h1>In you, I’ve found my always. <br>Will you be my forever?</h1>
   <div class="buttons">
     <button id="yes">Yes 💖</button>
     <button id="no">No 😢</button>
   </div>
-  <div class="message" id="message">You just made me the happiest person ever! 💍✨</div>
+  <div class="message" id="message">My heart just danced. Forever starts now 💑✨</div>
   <div class="characters" id="characters">
-    <div class="character dancing" id="char1">🕺</div>
-    <div class="character hidden" id="char2">💃</div>
+    <div class="character dancing flip" id="char1">🧑‍🦱</div>
+    <div class="character hidden" id="char2">👩‍🦰</div>
   </div>
-  <div class="hearts" id="hearts"></div>
+  <div class="flowers" id="flowers"></div>
 
   <script>
     const yesBtn = document.getElementById('yes');
     const noBtn = document.getElementById('no');
     const message = document.getElementById('message');
-    const hearts = document.getElementById('hearts');
+    const flowers = document.getElementById('flowers');
     const char1 = document.getElementById('char1');
     const char2 = document.getElementById('char2');
+
+    const flowerTypes = ['🌸', '🌼', '🌷', '🌹', '💐'];
 
     yesBtn.addEventListener('click', () => {
       message.style.display = 'block';
 
-      // Heart explosion
+      // Flower explosion
       for (let i = 0; i < 100; i++) {
-        const heart = document.createElement('div');
-        heart.classList.add('heart');
-        heart.style.left = Math.random() * window.innerWidth + 'px';
-        heart.style.top = Math.random() * window.innerHeight + 'px';
-        heart.style.background = `hsl(${Math.random() * 360}, 80%, 60%)`;
-        hearts.appendChild(heart);
-        setTimeout(() => heart.remove(), 3000);
+        const flower = document.createElement('div');
+        flower.classList.add('flower');
+        flower.textContent = flowerTypes[Math.floor(Math.random() * flowerTypes.length)];
+        flower.style.left = Math.random() * window.innerWidth + 'px';
+        flower.style.top = Math.random() * window.innerHeight + 'px';
+        flower.style.fontSize = `${16 + Math.random() * 20}px`;
+        flowers.appendChild(flower);
+        setTimeout(() => flower.remove(), 3000);
       }
 
       // Show hug character
