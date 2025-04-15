@@ -7,7 +7,7 @@
     body {
       margin: 0;
       height: 100vh;
-      background: linear-gradient(to bottom right, #ffdee9, #b5fffc);
+      background: linear-gradient(to bottom right, #ffe0ec, #c6fff7);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -19,15 +19,16 @@
 
     h1 {
       font-size: 3.5rem;
-      color: #e91e63;
+      color: #ff4081;
       margin-bottom: 40px;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.15);
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
     }
 
     .buttons {
       display: flex;
       gap: 20px;
       z-index: 3;
+      margin-bottom: 20px;
     }
 
     button {
@@ -55,19 +56,16 @@
     #no {
       background: #fff;
       color: #333;
-      position: relative;
-    }
-
-    #no:hover {
-      transform: translate(
-        calc(100px - 200px * Math.random()),
-        calc(100px - 200px * Math.random())
-      );
+      position: absolute;
+      top: 75%;
+      left: 55%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
     }
 
     .characters {
       position: absolute;
-      bottom: 120px;
+      bottom: 180px;
       width: 100%;
       display: flex;
       justify-content: center;
@@ -76,34 +74,18 @@
       pointer-events: none;
     }
 
-    .cartoon {
-      width: 100px;
-      height: 160px;
-      background: #ffe0f0;
-      border: 3px solid #ff94c2;
-      border-radius: 40% 40% 30% 30%;
-      position: relative;
+    .character-img {
+      width: 200px;
+      height: auto;
       transition: transform 1s ease;
     }
 
-    .cartoon::before {
-      content: '';
-      position: absolute;
-      top: -30px;
-      left: 25px;
-      width: 50px;
-      height: 50px;
-      background: #ffd1dc;
-      border-radius: 50%;
-      border: 3px solid #ff94c2;
-    }
-
     .left {
-      transform: translateX(-120px);
+      transform: translateX(-140px);
     }
 
     .right {
-      transform: translateX(120px);
+      transform: translateX(140px);
     }
 
     .hug-left {
@@ -115,17 +97,17 @@
     }
 
     @keyframes hug-left {
-      to { transform: translateX(-20px); }
+      to { transform: translateX(-30px); }
     }
 
     @keyframes hug-right {
-      to { transform: translateX(20px); }
+      to { transform: translateX(30px); }
     }
 
     .message {
-      margin-top: 40px;
+      margin-top: 30px;
       font-size: 2rem;
-      color: #e91e63;
+      color: #d81b60;
       display: none;
       text-align: center;
       max-width: 80%;
@@ -165,7 +147,7 @@
 
   <h1>Will You Be My Forever?</h1>
   <div class="buttons">
-    <button id="yes">Yes 💞</button>
+    <button id="yes">Yes 💖</button>
     <button id="no">No 😢</button>
   </div>
 
@@ -175,8 +157,8 @@
   </div>
 
   <div class="characters">
-    <div class="cartoon left" id="leftChar"></div>
-    <div class="cartoon right" id="rightChar"></div>
+    <img src="https://i.ibb.co/d4m7sKv/cartoon-girl.png" class="character-img left" id="leftChar" alt="cartoon girl">
+    <img src="https://i.ibb.co/R0Jd7c8/cartoon-boy.png" class="character-img right" id="rightChar" alt="cartoon boy">
   </div>
 
   <div class="flowers" id="flowers"></div>
@@ -191,11 +173,10 @@
 
     yesBtn.addEventListener('click', () => {
       message.style.display = 'block';
-
       leftChar.classList.add('hug-left');
       rightChar.classList.add('hug-right');
 
-      for (let i = 0; i < 50; i++) {
+      for (let i = 0; i < 40; i++) {
         const flower = document.createElement('div');
         flower.classList.add('flower');
         flower.style.left = Math.random() * window.innerWidth + 'px';
@@ -208,8 +189,7 @@
     });
 
     noBtn.addEventListener('mouseover', () => {
-      noBtn.style.position = 'absolute';
-      noBtn.style.top = Math.random() * (window.innerHeight - 60) + 'px';
+      noBtn.style.top = Math.random() * (window.innerHeight - 80) + 'px';
       noBtn.style.left = Math.random() * (window.innerWidth - 120) + 'px';
     });
   </script>
