@@ -7,7 +7,7 @@
     body {
       margin: 0;
       height: 100vh;
-      background: linear-gradient(to bottom right, #ffd6e0, #ffe6f7);
+      background: linear-gradient(to bottom right, #ffdee9, #b5fffc);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -19,10 +19,9 @@
 
     h1 {
       font-size: 3.5rem;
-      color: #d6336c;
-      text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
-      margin-bottom: 50px;
-      font-weight: bold;
+      color: #e91e63;
+      margin-bottom: 40px;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.15);
     }
 
     .buttons {
@@ -44,11 +43,11 @@
 
     #yes {
       background: #fff;
-      color: #ff4d6d;
+      color: #e91e63;
     }
 
     #yes:hover {
-      background: #ff4d6d;
+      background: #e91e63;
       color: #fff;
       transform: scale(1.1);
     }
@@ -66,17 +65,9 @@
       );
     }
 
-    .message {
-      margin-top: 40px;
-      font-size: 2rem;
-      color: #a83256;
-      display: none;
-      z-index: 3;
-    }
-
     .characters {
       position: absolute;
-      bottom: 100px;
+      bottom: 120px;
       width: 100%;
       display: flex;
       justify-content: center;
@@ -85,64 +76,86 @@
       pointer-events: none;
     }
 
-    .bear {
-      font-size: 6rem;
-      transition: transform 1s ease;
+    .cartoon {
+      width: 100px;
+      height: 160px;
+      background: #ffe0f0;
+      border: 3px solid #ff94c2;
+      border-radius: 40% 40% 30% 30%;
       position: relative;
+      transition: transform 1s ease;
     }
 
-    .bear.left {
+    .cartoon::before {
+      content: '';
+      position: absolute;
+      top: -30px;
+      left: 25px;
+      width: 50px;
+      height: 50px;
+      background: #ffd1dc;
+      border-radius: 50%;
+      border: 3px solid #ff94c2;
+    }
+
+    .left {
       transform: translateX(-120px);
     }
 
-    .bear.right {
+    .right {
       transform: translateX(120px);
     }
 
-    .bear.hug-left {
+    .hug-left {
       animation: hug-left 1s forwards;
     }
 
-    .bear.hug-right {
+    .hug-right {
       animation: hug-right 1s forwards;
     }
 
     @keyframes hug-left {
-      0% { transform: translateX(-120px); }
-      50% { transform: translateX(-40px) scale(1.1); }
-      100% { transform: translateX(0px) scale(1); }
+      to { transform: translateX(-20px); }
     }
 
     @keyframes hug-right {
-      0% { transform: translateX(120px); }
-      50% { transform: translateX(40px) scale(1.1); }
-      100% { transform: translateX(0px) scale(1); }
+      to { transform: translateX(20px); }
     }
 
-    .hearts {
+    .message {
+      margin-top: 40px;
+      font-size: 2rem;
+      color: #e91e63;
+      display: none;
+      text-align: center;
+      max-width: 80%;
+      z-index: 3;
+    }
+
+    .flowers {
       position: absolute;
+      width: 100%;
+      height: 100%;
       top: 0;
       left: 0;
       pointer-events: none;
-      width: 100%;
-      height: 100%;
       overflow: hidden;
       z-index: 0;
     }
 
-    .heart {
-      width: 20px;
-      height: 20px;
-      background: red;
+    .flower {
       position: absolute;
-      animation: float 3s ease-in forwards;
-      transform: rotate(45deg);
-      clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 20% 100%, 0 35%);
+      font-size: 1.8rem;
+      animation: float 5s ease-in infinite;
     }
 
     @keyframes float {
-      to {
-        transform: translateY(-100vh) rotate(720deg);
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(360deg) scale(1.5);
         opacity: 0;
       }
     }
@@ -152,42 +165,45 @@
 
   <h1>Will You Be My Forever?</h1>
   <div class="buttons">
-    <button id="yes">Yes 🧸💖</button>
+    <button id="yes">Yes 💞</button>
     <button id="no">No 😢</button>
   </div>
-  <div class="message" id="message">Awww! Teddy love unlocked 🧸💞🧸</div>
 
-  <div class="characters">
-    <div class="bear left" id="bear1">🧸</div>
-    <div class="bear right" id="bear2">🧸</div>
+  <div class="message" id="message">
+    <p>🌸 Take your flowers 🌸</p>
+    <p style="font-size: 1.4rem;">From the moment I met you, I knew… Forever wouldn’t be long enough 💗</p>
   </div>
 
-  <div class="hearts" id="hearts"></div>
+  <div class="characters">
+    <div class="cartoon left" id="leftChar"></div>
+    <div class="cartoon right" id="rightChar"></div>
+  </div>
+
+  <div class="flowers" id="flowers"></div>
 
   <script>
     const yesBtn = document.getElementById('yes');
     const noBtn = document.getElementById('no');
     const message = document.getElementById('message');
-    const hearts = document.getElementById('hearts');
-    const bear1 = document.getElementById('bear1');
-    const bear2 = document.getElementById('bear2');
+    const leftChar = document.getElementById('leftChar');
+    const rightChar = document.getElementById('rightChar');
+    const flowers = document.getElementById('flowers');
 
     yesBtn.addEventListener('click', () => {
       message.style.display = 'block';
 
-      // Animate hugging bears
-      bear1.classList.add('hug-left');
-      bear2.classList.add('hug-right');
+      leftChar.classList.add('hug-left');
+      rightChar.classList.add('hug-right');
 
-      // Heart explosion
-      for (let i = 0; i < 100; i++) {
-        const heart = document.createElement('div');
-        heart.classList.add('heart');
-        heart.style.left = Math.random() * window.innerWidth + 'px';
-        heart.style.top = Math.random() * window.innerHeight + 'px';
-        heart.style.background = `hsl(${Math.random() * 360}, 80%, 60%)`;
-        hearts.appendChild(heart);
-        setTimeout(() => heart.remove(), 3000);
+      for (let i = 0; i < 50; i++) {
+        const flower = document.createElement('div');
+        flower.classList.add('flower');
+        flower.style.left = Math.random() * window.innerWidth + 'px';
+        flower.style.top = Math.random() * window.innerHeight + 'px';
+        flower.innerText = ['🌸','🌼','🌷','💐','🌻'][Math.floor(Math.random() * 5)];
+        flower.style.animationDuration = (3 + Math.random() * 4) + 's';
+        flowers.appendChild(flower);
+        setTimeout(() => flower.remove(), 5000);
       }
     });
 
